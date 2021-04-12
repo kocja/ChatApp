@@ -110,7 +110,7 @@ function updateFooter(text) {
 }
 
 function startWebSocket() {
-    const ws = new WebSocket('ws://localhost:5001/ws');
+    const ws = new WebSocket('ws://localhost:8080/ws');
     ws.onerror = event => console.error('WebSocket Error', event);
     ws.onmessage = event => handleMessage(event.data);
     ws.onopen = () => updateFooter('Websocket connected!');
@@ -147,7 +147,7 @@ function handleMessage(input) {
             const avatarElement = rootElement.getElementsByTagName('img')[0];
             avatarElement.setAttribute('style', 'width: 24px; height: 24px; filter: ' + (filtersByStatus[jsonObject.data.status] || ''));
             // Update avatar
-            avatarElement.setAttribute("src", "images/avatar_icon_" + jsonObject.data.avatar + ".svg");
+            avatarElement.setAttribute('src', '/images/avatar_icon_' + jsonObject.data.avatar + '.svg');
             break;
         case 'user_deleted':
             const element = document.getElementById(jsonObject.data.id);
@@ -164,9 +164,9 @@ function handleMessage(input) {
 }
 
 const filtersByStatus = {
-    'online': 'invert(21%) sepia(88%) saturate(3552%) hue-rotate(96deg) brightness(97%) contrast(103%)',
-    'offline': 'invert(11%) sepia(67%) saturate(3947%) hue-rotate(353deg) brightness(94%) contrast(117%)',
-    'away': 'invert(56%) sepia(25%) saturate(6340%) hue-rotate(1deg) brightness(103%) contrast(105%)'
+    'ONLINE': 'invert(21%) sepia(88%) saturate(3552%) hue-rotate(96deg) brightness(97%) contrast(103%)',
+    'OFFLINE': 'invert(11%) sepia(67%) saturate(3947%) hue-rotate(353deg) brightness(94%) contrast(117%)',
+    'AWAY': 'invert(56%) sepia(25%) saturate(6340%) hue-rotate(1deg) brightness(103%) contrast(105%)'
 };
 
 function addUser(user) {
@@ -179,7 +179,7 @@ function addUser(user) {
     }
 
     const avatar = document.createElement("img")
-    avatar.setAttribute("src", "images/avatar_icon_" + user.avatar + ".svg");
+    avatar.setAttribute('src', '/images/avatar_icon_' + user.avatar + '.svg');
     avatar.setAttribute('alt', 'Avatar' + user.avatar);
     avatar.setAttribute('style', 'width: 24px; height: 24px; filter: ' + (filtersByStatus[user.status] || ''));
     avatar.className = 'mr-1';

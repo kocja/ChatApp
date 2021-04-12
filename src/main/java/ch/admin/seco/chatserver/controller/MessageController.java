@@ -29,7 +29,7 @@ public class MessageController {
 
 
     @PostMapping
-    public int createMessage(@RequestBody CreateMessageDto messageDto) {
+    public MessageDto createMessage(@RequestBody CreateMessageDto messageDto) {
         return messageService.createMessage(messageDto);
     }
 

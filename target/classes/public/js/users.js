@@ -23,7 +23,8 @@ function createUser(nickName) {
     console.log("createUser")
     const body = {
         nickname: nickName,
-        status: 'online'
+        status: 'ONLINE',
+        avatar: 1
     };
     return fetch(users_endpoint, {
         headers: {

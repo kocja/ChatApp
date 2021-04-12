@@ -1,4 +1,4 @@
-const messages_endpoint ='http://localhost:5001/api/Messages';
+const messages_endpoint ='http://localhost:8080/api/message';
 
 function mapResponseIfNoError(response) {
     return response.ok ? response.json() : response.json().then(error => Promise.reject(error));
