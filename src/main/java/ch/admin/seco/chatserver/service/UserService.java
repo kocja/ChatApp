@@ -39,9 +39,9 @@ public class UserService {
         return mapToDto(userRepository.getOne(id));
     }
 
-    public int createUser(CreateUserDto userDto) {
+    public UserDto createUser(CreateUserDto userDto) {
         final UserEntity userEntity = userRepository.save(new UserEntity(userDto.getNickname(), userDto.getStatus(), userDto.getAvatar()));
-        return userEntity.getId();
+        return mapToDto(userEntity);
     }
 
     public UserDto updateUser(final int id, UpdateUserDto userDto) {

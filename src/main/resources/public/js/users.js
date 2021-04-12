@@ -1,4 +1,4 @@
-const users_endpoint = 'http://localhost:5001/api/Users';
+const users_endpoint = 'http://localhost:8080/api/users';
 
 function mapResponseIfNoError(response) {
     return response.ok
@@ -20,6 +20,7 @@ function getUserById(userId) {
 
 
 function createUser(nickName) {
+    console.log("createUser")
     const body = {
         nickname: nickName,
         status: 'online'
