@@ -13,39 +13,39 @@ import java.util.List;
 @Service
 public class UserService {
 
-    private final UserRepository userRepository;
+    private final UserRepository USER_REPOSITORY;
 
     public UserService(final UserRepository userRepository) {
-        this.userRepository = userRepository;
+        this.USER_REPOSITORY = userRepository;
+    }
+
+    private static UserDto mapToDto(final UserEntity USER_ENTITY) {
+        return new UserDto(USER_ENTITY.getId(), USER_ENTITY.getNickname(), USER_ENTITY.getStatus(), USER_ENTITY.getAvatar());
     }
 
     private static List<UserDto> mapToDto(final List<UserEntity> userEntities) {
-        final List<UserDto> users = new ArrayList<>();
-        for (final UserEntity userEntity : userEntities) {
-            users.add(mapToDto(userEntity));
+        final List<UserDto> USERS = new ArrayList<>();
+        for (final UserEntity USER_ENTITY : userEntities) {
+            USERS.add(mapToDto(USER_ENTITY));
         }
-        return users;
-    }
-
-    private static UserDto mapToDto(final UserEntity userEntity) {
-        return new UserDto(userEntity.getId(), userEntity.getNickname(), userEntity.getStatus(), userEntity.getAvatar());
+        return USERS;
     }
 
     public List<UserDto> getAllUsers() {
-        return mapToDto(userRepository.findAll());
+        return mapToDto(USER_REPOSITORY.findAll());
     }
 
     public UserDto getUserById(final int id) {
-        return mapToDto(userRepository.getOne(id));
+        return mapToDto(USER_REPOSITORY.getOne(id));
     }
 
     public UserDto createUser(CreateUserDto userDto) {
-        final UserEntity userEntity = userRepository.save(new UserEntity(userDto.getNickname(), userDto.getStatus(), userDto.getAvatar()));
+        final UserEntity userEntity = USER_REPOSITORY.save(new UserEntity(userDto.getNickname(), userDto.getStatus(), userDto.getAvatar()));
         return mapToDto(userEntity);
     }
 
     public UserDto updateUser(final int id, UpdateUserDto userDto) {
-        final UserEntity userEntity = userRepository.getOne(id);
+        final UserEntity userEntity = USER_REPOSITORY.getOne(id);
         if (userDto.getNickname() != null) {
             userEntity.setNickname(userDto.getNickname());
         }
@@ -55,10 +55,10 @@ public class UserService {
         if (userDto.getAvatar() != null) {
             userEntity.setAvatar(userDto.getAvatar());
         }
-        return mapToDto(userRepository.save(userEntity));
+        return mapToDto(USER_REPOSITORY.save(userEntity));
     }
 
     public void removeUser(final int id) {
-        userRepository.deleteById(id);
+        USER_REPOSITORY.deleteById(id);
     }
 }

@@ -11,7 +11,7 @@ public class UserDto {
     private Status status;
     private int avatar;
 
-    public UserDto(final int id, final String nickname, final Status status, final int avatar){
+    public UserDto(final int id, String nickname, Status status, int avatar){
         this.id = id;
         this.nickname = nickname;
         this.status = status;
