@@ -33,6 +33,11 @@ public class MessageController {
         return messageService.createMessage(messageDto);
     }
 
+    /*@DeleteMapping("{id}")
+    public void deleteAllMessages(@PathVariable final int id){
+
+    }*/
+
 }
 
 

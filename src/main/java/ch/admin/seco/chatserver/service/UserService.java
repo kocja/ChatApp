@@ -13,14 +13,14 @@ import java.util.List;
 @Service
 public class UserService {
 
-    private final UserRepository USER_REPOSITORY;
+    private final UserRepository userRepository;
 
     public UserService(final UserRepository userRepository) {
-        this.USER_REPOSITORY = userRepository;
+        this.userRepository = userRepository;
     }
 
-    private static UserDto mapToDto(final UserEntity USER_ENTITY) {
-        return new UserDto(USER_ENTITY.getId(), USER_ENTITY.getNickname(), USER_ENTITY.getStatus(), USER_ENTITY.getAvatar());
+    private static UserDto mapToDto(final UserEntity userEntity) {
+        return new UserDto(userEntity.getId(), userEntity.getNickname(), userEntity.getStatus(), userEntity.getAvatar());
     }
 
     private static List<UserDto> mapToDto(final List<UserEntity> userEntities) {
@@ -32,20 +32,20 @@ public class UserService {
     }
 
     public List<UserDto> getAllUsers() {
-        return mapToDto(USER_REPOSITORY.findAll());
+        return mapToDto(userRepository.findAll());
     }
 
     public UserDto getUserById(final int id) {
-        return mapToDto(USER_REPOSITORY.getOne(id));
+        return mapToDto(userRepository.getOne(id));
     }
 
     public UserDto createUser(CreateUserDto userDto) {
-        final UserEntity userEntity = USER_REPOSITORY.save(new UserEntity(userDto.getNickname(), userDto.getStatus(), userDto.getAvatar()));
+        final UserEntity userEntity = userRepository.save(new UserEntity(userDto.getNickname(), userDto.getStatus(), userDto.getAvatar()));
         return mapToDto(userEntity);
     }
 
     public UserDto updateUser(final int id, UpdateUserDto userDto) {
-        final UserEntity userEntity = USER_REPOSITORY.getOne(id);
+        final UserEntity userEntity = userRepository.getOne(id);
         if (userDto.getNickname() != null) {
             userEntity.setNickname(userDto.getNickname());
         }
@@ -55,10 +55,10 @@ public class UserService {
         if (userDto.getAvatar() != null) {
             userEntity.setAvatar(userDto.getAvatar());
         }
-        return mapToDto(USER_REPOSITORY.save(userEntity));
+        return mapToDto(userRepository.save(userEntity));
     }
 
     public void removeUser(final int id) {
-        USER_REPOSITORY.deleteById(id);
+        userRepository.deleteById(id);
     }
 }

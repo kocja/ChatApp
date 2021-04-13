@@ -83,7 +83,7 @@
                             updateUser({
                                 id: userId,
                                 nickname: nickName,
-                                status: 'online'
+                                status: 'ONLINE'
                             })
                                 .then(user => localStorage.setItem('user-name', user.nickname))
                                 .then(() => window.location.href = 'chat.html')
