@@ -12,7 +12,8 @@ function getAllMessages() {
 function createMessage(userId, newMessage) {
     const body = {
         user_id: userId,
-        message: newMessage
+        message: newMessage,
+        timestamp: Date.now()
     };
 
     return fetch(messages_endpoint, {

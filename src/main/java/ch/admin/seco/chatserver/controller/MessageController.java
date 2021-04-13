@@ -11,7 +11,7 @@ import java.util.List;
 @RequestMapping("api/message")
 public class MessageController {
 
-    private MessageService messageService;
+    private final MessageService messageService;
 
     public MessageController(final MessageService messageService) {
         this.messageService = messageService;

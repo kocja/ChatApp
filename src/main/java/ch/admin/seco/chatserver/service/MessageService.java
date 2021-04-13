@@ -33,7 +33,7 @@ public class MessageService {
     }
 
     private static MessageDto mapToDto(final MessageEntity messageEntity) {
-        return new MessageDto(messageEntity.getId(), messageEntity.getMessage(), messageEntity.getUser_id());
+        return new MessageDto(messageEntity.getId(), messageEntity.getMessage(), messageEntity.getUser_id(), messageEntity.getTimestamp());
     }
 
     public List<MessageDto> getAllMessages() {
@@ -45,11 +45,12 @@ public class MessageService {
     }
 
     public MessageDto createMessage(CreateMessageDto messageDto) {
-        final MessageEntity messageEntity = messageRepository.save(new MessageEntity(messageDto.getMessage(), messageDto.getUser_id()));
+        final MessageEntity messageEntity = messageRepository.save(new MessageEntity(messageDto.getMessage(), messageDto.getUser_id(), messageDto.getTimestamp()));
         final MessageDto messageEntityDto = mapToDto(messageEntity);
         webSocketController.sendMessage(messageEntityDto);
         return messageEntityDto;
     }
+
 
     /* TODO: Update Message (controller?)
     public MessageDto updateMessage(final int id, UpdateMessageDto messageDto){
