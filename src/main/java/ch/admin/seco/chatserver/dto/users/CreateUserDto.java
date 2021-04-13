@@ -1,9 +1,10 @@
 package ch.admin.seco.chatserver.dto.users;
 
 public class CreateUserDto {
-    private String nickname;
-    private Status status;
-    private int avatar;
+
+    private final String nickname;
+    private final Status status;
+    private final int avatar;
 
     public CreateUserDto(final String nickname, final Status status, final int avatar){
         this.nickname = nickname;

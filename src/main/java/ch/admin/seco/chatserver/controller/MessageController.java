@@ -33,13 +33,6 @@ public class MessageController {
         return messageService.createMessage(messageDto);
     }
 
-
-    /*
-    @PutMapping("{id}")
-    public MessageDto updateMessage(@PathVariable final int id, @RequestBody UpdateMessageDto messageDto){
-        return messageService.updateMessage(id, messageDto);
-    }*/
-
 }
 
 

@@ -1,6 +1,7 @@
 package ch.admin.seco.chatserver.dto.messages;
 
 public class UpdateMessageDto {
+
     private String message;
     private int user_id;
 

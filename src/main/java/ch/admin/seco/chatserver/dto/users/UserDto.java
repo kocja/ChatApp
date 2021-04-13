@@ -3,7 +3,7 @@ package ch.admin.seco.chatserver.dto.users;
 public class UserDto {
 
     /*
-    User Objekte erstellen, getter und setter.
+    Create the user. Modifiers are private, due to access of getter and setters.
      */
 
     private final int id;

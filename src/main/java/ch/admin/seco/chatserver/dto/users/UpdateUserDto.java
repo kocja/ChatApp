@@ -1,25 +1,27 @@
 package ch.admin.seco.chatserver.dto.users;
 
 public class UpdateUserDto {
-    private final String NICKNAME;
-    private final Status STATUS;
-    private final Integer AVATAR;
+
+    // Declared final, user already exists
+    private final String nickname;
+    private final Status status;
+    private final Integer avatar;
 
     public UpdateUserDto(final String nickname, final Status status, final Integer avatar){
-        this.NICKNAME = nickname;
-        this.STATUS = status;
-        this.AVATAR = avatar;
+        this.nickname = nickname;
+        this.status = status;
+        this.avatar = avatar;
     }
 
     public String getNickname() {
-        return NICKNAME;
+        return nickname;
     }
 
     public Status getStatus() {
-        return STATUS;
+        return status;
     }
 
     public Integer getAvatar() {
-        return AVATAR;
+        return avatar;
     }
 }

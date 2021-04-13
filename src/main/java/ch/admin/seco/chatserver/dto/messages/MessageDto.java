@@ -3,6 +3,7 @@ package ch.admin.seco.chatserver.dto.messages;
 import java.util.Date;
 
 public class MessageDto {
+
     private final int id;
     private String message;
     private int user_id;
