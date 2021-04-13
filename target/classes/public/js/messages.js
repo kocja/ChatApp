@@ -13,7 +13,7 @@ function createMessage(userId, newMessage) {
     const body = {
         user_id: userId,
         message: newMessage,
-        timestamp: Date.now().toString()
+        timestamp: Date.now()
     };
 
     return fetch(messages_endpoint, {
