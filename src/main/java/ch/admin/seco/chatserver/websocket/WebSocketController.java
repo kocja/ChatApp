@@ -22,7 +22,6 @@ public class WebSocketController extends TextWebSocketHandler {
     }
 
     // Sends active session into the array list
-    //TODO: sendPayload call
     public <T> void sendPayload(final String action, final T payload) {
         try {
             final String res = objectMapper.writeValueAsString(Message.of(action, payload));

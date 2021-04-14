@@ -1,8 +1,11 @@
 package ch.admin.seco.chatserver.controller;
 
+import ch.admin.seco.chatserver.data.messages.MessageRepository;
 import ch.admin.seco.chatserver.dto.messages.CreateMessageDto;
 import ch.admin.seco.chatserver.dto.messages.MessageDto;
 import ch.admin.seco.chatserver.service.MessageService;
+import ch.admin.seco.chatserver.websocket.WebSocketController;
+import org.springframework.messaging.Message;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -12,9 +15,11 @@ import java.util.List;
 public class MessageController {
 
     private final MessageService messageService;
+    private final WebSocketController webSocketController;
 
-    public MessageController(final MessageService messageService) {
+    public MessageController(final MessageService messageService, WebSocketController webSocketController) {
         this.messageService = messageService;
+        this.webSocketController = webSocketController;
     }
 
     @GetMapping
@@ -29,15 +34,15 @@ public class MessageController {
 
 
     @PostMapping
-    public MessageDto createMessage(@RequestBody CreateMessageDto messageDto) {
-        return messageService.createMessage(messageDto);
+    public MessageDto createMessage(@RequestBody final CreateMessageDto messageDto) {
+        webSocketController.sendPayload("message_added", messageService.createMessage(messageDto));
+        return null;
     }
 
-    /*@DeleteMapping("{id}")
-    public void deleteAllMessages(@PathVariable final int id){
-
-    }*/
-
+    @DeleteMapping
+    public void deleteAllMessages(){
+        messageService.deleteAllMessages();
+    }
 }
 
 

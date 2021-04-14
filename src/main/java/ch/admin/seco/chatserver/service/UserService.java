@@ -58,7 +58,11 @@ public class UserService {
         return mapToDto(userRepository.save(userEntity));
     }
 
-    public void removeUser(final int id) {
+    public void deleteUserById(final int id) {
         userRepository.deleteById(id);
+    }
+
+    public void deleteAllUsers(){
+        userRepository.deleteAll();
     }
 }

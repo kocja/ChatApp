@@ -55,4 +55,8 @@ public class MessageService {
         }
         return mapToDto(messageRepository.save(messageEntity));
     }
+
+    public void deleteAllMessages(){
+        messageRepository.deleteAll();
+    }
 }
