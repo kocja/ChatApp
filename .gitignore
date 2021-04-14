@@ -26,3 +26,4 @@ hs_err_pid*
 .idea/libraries/Maven__net_java_dev_jna_jna_5_5_0.xml
 .idea/libraries/Maven__net_java_dev_jna_jna_platform_5_5_0.xml
 *.xml
+*.xml
