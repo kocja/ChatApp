@@ -2,11 +2,15 @@ package ch.admin.seco.chatserver.websocket;
 
 import ch.admin.seco.chatserver.dto.messages.CreateMessageDto;
 import ch.admin.seco.chatserver.dto.messages.MessageDto;
+import ch.admin.seco.chatserver.dto.messages.UpdateMessageDto;
+import ch.admin.seco.chatserver.dto.users.CreateUserDto;
 import ch.admin.seco.chatserver.service.MessageService;
+import ch.admin.seco.chatserver.service.UserService;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.springframework.stereotype.Component;
 import org.springframework.web.socket.CloseStatus;
 import org.springframework.web.socket.TextMessage;
+import org.springframework.web.socket.WebSocketMessage;
 import org.springframework.web.socket.WebSocketSession;
 import org.springframework.web.socket.handler.TextWebSocketHandler;
 
@@ -20,10 +24,12 @@ public class WebSocketController extends TextWebSocketHandler {
     private final List<WebSocketSession> activeSessions = new CopyOnWriteArrayList<>(); //Avoid overwriting threads in any case
     private final ObjectMapper objectMapper;
     private final MessageService messageService;
+    private final UserService userService;
 
-    public WebSocketController(final ObjectMapper objectMapper, final MessageService messageService) {
+    public WebSocketController(final ObjectMapper objectMapper, final MessageService messageService, final UserService userService) {
         this.objectMapper = objectMapper;
         this.messageService = messageService;
+        this.userService = userService;
     }
 
     // Sends active session into the array list
@@ -42,11 +48,25 @@ public class WebSocketController extends TextWebSocketHandler {
     @Override
     protected void handleTextMessage(WebSocketSession session, TextMessage message) throws Exception {
         super.handleTextMessage(session, message);
+
+        // Handle the text message when an user gets added
+        final CreateUserDto createUserDto = objectMapper.readValue(message.getPayload(), CreateUserDto.class);
+        userService.createUser(createUserDto);
+        sendPayload("user_added", createUserDto);
+        System.out.println("user = " + message.getPayload());
+
+        // Handle the text message when an user gets altered
+        /*final UpdateMessageDto updateMessageDto = objectMapper.readValue(message.getPayload(), UpdateMessageDto.class);
+        userService.updateUser(updateMessageDto.getUser_id(), updateMessageDto.);
+        sendPayload("user_updated", updateMessageDto);*/
+
+        // Handle text message when a new message is sent
         final CreateMessageDto createMessageDto = objectMapper.readValue(message.getPayload(), CreateMessageDto.class);
         messageService.createMessage(createMessageDto);
         sendPayload("message_added", createMessageDto);
         System.out.println("message = " + message.getPayload());
     }
+
 
     // Responsible for opening and closing of each session
     @Override
