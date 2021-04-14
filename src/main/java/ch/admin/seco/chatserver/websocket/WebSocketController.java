@@ -23,6 +23,7 @@ public class WebSocketController extends TextWebSocketHandler {
 
     // Sends active session into the array list
     public <T> void sendPayload(final String action, final T payload) {
+        System.out.println("Websocket message sent");
         try {
             final String res = objectMapper.writeValueAsString(Message.of(action, payload));
             for (final WebSocketSession activeSession : activeSessions) {

@@ -34,8 +34,9 @@ public class UserController {
 
     @PostMapping
     public UserDto createUser(@RequestBody CreateUserDto userDto) {
-        webSocketController.sendPayload("user_added", userService.createUser(userDto));
-        return null;
+        UserDto user = userService.createUser(userDto);
+        webSocketController.sendPayload("user_added", user);
+        return user;
     }
 
     @PutMapping("{id}")
