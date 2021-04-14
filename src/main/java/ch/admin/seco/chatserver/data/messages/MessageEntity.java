@@ -4,6 +4,7 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.xml.crypto.Data;
+import java.time.Instant;
 import java.util.Date;
 
 @Entity
@@ -14,9 +15,9 @@ public class MessageEntity {
 
     private String message;
     private int user_id;
-    private Date timestamp;
+    private Instant timestamp;
 
-    public MessageEntity(String message, int user_id, Date timestamp) {
+    public MessageEntity(String message, int user_id, Instant timestamp) {
         this.message = message;
         this.user_id = user_id;
         this.timestamp = timestamp;
@@ -46,11 +47,11 @@ public class MessageEntity {
         this.user_id = user_id;
     }
 
-    public Date getTimestamp() {
+    public Instant getTimestamp() {
         return timestamp;
     }
 
-    public void setTimestamp(Date timestamp) {
+    public void setTimestamp(Instant timestamp) {
         this.timestamp = timestamp;
     }
 

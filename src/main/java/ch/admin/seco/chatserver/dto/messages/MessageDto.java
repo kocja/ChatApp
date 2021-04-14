@@ -1,5 +1,6 @@
 package ch.admin.seco.chatserver.dto.messages;
 
+import java.time.Instant;
 import java.util.Date;
 
 public class MessageDto {
@@ -7,9 +8,9 @@ public class MessageDto {
     private final int id;
     private String message;
     private int user_id;
-    private Date timestamp;
+    private Instant timestamp;
 
-    public MessageDto(final int id, final String message, final int user_id, Date timestamp){
+    public MessageDto(final int id, final String message, final int user_id, Instant timestamp){
         this.id = id;
         this.message = message;
         this.user_id = user_id;
@@ -36,11 +37,11 @@ public class MessageDto {
         this.user_id = user_id;
     }
 
-    public Date getTimestamp() {
+    public Instant getTimestamp() {
         return timestamp;
     }
 
-    public void setTimestamp(Date timestamp) {
+    public void setTimestamp(Instant timestamp) {
         this.timestamp = timestamp;
     }
 
