@@ -36,10 +36,7 @@ document.addEventListener('DOMContentLoaded', () => {
             if (textField) {
                 const newMessage = textField.value;
                 if (newMessage) {
-                    createMessage(userId, newMessage)
-                        .then(id => localStorage.setItem('message-id', id))
-                        .then(() => localStorage.setItem('message', newMessage))
-                        .catch(() => console.error('Message couldn\'t be sent.'))
+                    createMessageWS(userId, newMessage);
                 }
             }
         })
@@ -109,14 +106,24 @@ function updateFooter(text) {
     }
 }
 
+const ws = new WebSocket('ws://localhost:8080/ws');
 function startWebSocket() {
-    const ws = new WebSocket('ws://localhost:8080/ws');
     ws.onerror = event => console.error('WebSocket Error', event);
     ws.onmessage = event => handleMessage(event.data);
-    ws.onopen = () => updateFooter('Websocket connected!');
+    ws.onopen = () => {
+        updateFooter('Websocket connected!');
+    }
     ws.onclose = () => updateFooter("Not connected!");
 }
 
+function createMessageWS(userId, newMessage) {
+    const body = {
+        user_id: userId,
+        message: newMessage,
+        timestamp: Date.now()
+    };
+    ws.send(JSON.stringify(body));
+}
 
 function handleMessage(input) {
     const jsonObject = JSON.parse(input);

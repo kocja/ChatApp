@@ -28,6 +28,7 @@ function createMessage(userId, newMessage) {
         .then(message => message.id)
 }
 
+
 function getMessageById(messageId) {
     return fetch(messages_endpoint + '/' + messageId)
         .then(mapResponseIfNoError);

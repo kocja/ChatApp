@@ -32,7 +32,6 @@ public class MessageController {
 
     @PostMapping
     public MessageDto createMessage(@RequestBody final CreateMessageDto createMessageDto) {
-
         final MessageDto messageDto = messageService.createMessage(createMessageDto);
         webSocketController.sendPayload("message_added", messageDto);
         return messageDto;

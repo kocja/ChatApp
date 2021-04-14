@@ -1,5 +1,8 @@
 package ch.admin.seco.chatserver.websocket;
 
+import ch.admin.seco.chatserver.dto.messages.CreateMessageDto;
+import ch.admin.seco.chatserver.dto.messages.MessageDto;
+import ch.admin.seco.chatserver.service.MessageService;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.springframework.stereotype.Component;
 import org.springframework.web.socket.CloseStatus;
@@ -16,9 +19,11 @@ public class WebSocketController extends TextWebSocketHandler {
 
     private final List<WebSocketSession> activeSessions = new CopyOnWriteArrayList<>(); //Avoid overwriting threads in any case
     private final ObjectMapper objectMapper;
+    private final MessageService messageService;
 
-    public WebSocketController(final ObjectMapper objectMapper) {
+    public WebSocketController(final ObjectMapper objectMapper, final MessageService messageService) {
         this.objectMapper = objectMapper;
+        this.messageService = messageService;
     }
 
     // Sends active session into the array list
@@ -32,6 +37,15 @@ public class WebSocketController extends TextWebSocketHandler {
         } catch (final IOException exception) {
             System.err.println(exception.getMessage());
         }
+    }
+
+    @Override
+    protected void handleTextMessage(WebSocketSession session, TextMessage message) throws Exception {
+        super.handleTextMessage(session, message);
+        final CreateMessageDto createMessageDto = objectMapper.readValue(message.getPayload(), CreateMessageDto.class);
+        messageService.createMessage(createMessageDto);
+        sendPayload("message_added", createMessageDto);
+        System.out.println("message = " + message.getPayload());
     }
 
     // Responsible for opening and closing of each session
