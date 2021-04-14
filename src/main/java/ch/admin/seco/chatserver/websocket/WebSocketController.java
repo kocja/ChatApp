@@ -53,18 +53,16 @@ public class WebSocketController extends TextWebSocketHandler {
         final CreateUserDto createUserDto = objectMapper.readValue(message.getPayload(), CreateUserDto.class);
         userService.createUser(createUserDto);
         sendPayload("user_added", createUserDto);
-        System.out.println("user = " + message.getPayload());
 
         // Handle the text message when an user gets altered
         /*final UpdateMessageDto updateMessageDto = objectMapper.readValue(message.getPayload(), UpdateMessageDto.class);
-        userService.updateUser(updateMessageDto.getUser_id(), updateMessageDto.);
+        userService.updateUser(updateMessageDto.getUser_id(), updateMessageDto.???);
         sendPayload("user_updated", updateMessageDto);*/
 
         // Handle text message when a new message is sent
         final CreateMessageDto createMessageDto = objectMapper.readValue(message.getPayload(), CreateMessageDto.class);
         messageService.createMessage(createMessageDto);
         sendPayload("message_added", createMessageDto);
-        System.out.println("message = " + message.getPayload());
     }
 
 
