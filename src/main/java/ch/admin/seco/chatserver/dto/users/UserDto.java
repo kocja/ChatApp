@@ -1,5 +1,7 @@
 package ch.admin.seco.chatserver.dto.users;
 
+import java.time.Instant;
+
 public class UserDto {
 
     /*
@@ -10,12 +12,14 @@ public class UserDto {
     private String nickname;
     private Status status;
     private int avatar;
+    private Instant updated;
 
-    public UserDto(final int id, String nickname, Status status, int avatar){
+    public UserDto(final int id, String nickname, Status status, int avatar, Instant updated){
         this.id = id;
         this.nickname = nickname;
         this.status = status;
         this.avatar = avatar;
+        this.updated = updated;
     }
 
     public int getId() {
@@ -44,6 +48,14 @@ public class UserDto {
 
     public void setAvatar(int avatar) {
         this.avatar = avatar;
+    }
+
+    public Instant getUpdated() {
+        return updated;
+    }
+
+    public void setUpdated(Instant updated) {
+        this.updated = updated;
     }
 
 }

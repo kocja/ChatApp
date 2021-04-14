@@ -20,7 +20,7 @@ public class UserService {
     }
 
     private static UserDto mapToDto(final UserEntity userEntity) {
-        return new UserDto(userEntity.getId(), userEntity.getNickname(), userEntity.getStatus(), userEntity.getAvatar());
+        return new UserDto(userEntity.getId(), userEntity.getNickname(), userEntity.getStatus(), userEntity.getAvatar(), userEntity.getUpdated());
     }
 
     private static List<UserDto> mapToDto(final List<UserEntity> userEntities) {
@@ -40,7 +40,7 @@ public class UserService {
     }
 
     public UserDto createUser(CreateUserDto userDto) {
-        final UserEntity userEntity = userRepository.save(new UserEntity(userDto.getNickname(), userDto.getStatus(), userDto.getAvatar()));
+        final UserEntity userEntity = userRepository.save(new UserEntity(userDto.getNickname(), userDto.getStatus(), userDto.getAvatar(), userDto.getUpdated()));
         return mapToDto(userEntity);
     }
 

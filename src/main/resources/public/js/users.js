@@ -24,7 +24,8 @@ function createUser(nickName) {
     const body = {
         nickname: nickName,
         status: 'ONLINE',
-        avatar: 1
+        avatar: 1,
+        updated: Date.now()
     };
     return fetch(users_endpoint, {
         headers: {

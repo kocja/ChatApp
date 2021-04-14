@@ -5,6 +5,7 @@ import ch.admin.seco.chatserver.dto.users.Status;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import java.time.Instant;
 
 @Entity
 public class UserEntity {
@@ -15,15 +16,16 @@ public class UserEntity {
     private String nickname;
     private Status status;
     private int avatar;
+    private Instant updated;
 
-    public UserEntity(final String nickname, final Status status, final int avatar){
+    public UserEntity(final String nickname, final Status status, final int avatar, final Instant updated){
         this.nickname = nickname;
         this.status = status;
         this.avatar = avatar;
+        this.updated = updated;
     }
 
     protected UserEntity(){}
-
 
     public int getId() {
         return id;
@@ -51,5 +53,13 @@ public class UserEntity {
 
     public void setAvatar(int avatar) {
         this.avatar = avatar;
+    }
+
+    public Instant getUpdated() {
+        return updated;
+    }
+
+    public void setUpdated(Instant updated) {
+        this.updated = updated;
     }
 }
