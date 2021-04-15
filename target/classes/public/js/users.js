@@ -18,9 +18,21 @@ function getUserById(userId) {
         : Promise.reject('userId mustn\'t be empty');
 }
 
-
+// New user via WebSocket
 function createUser(nickName) {
-    console.log("createUser")
+    const body = {
+        nickname: nickName,
+        status: 'ONLINE',
+        avatar: 1,
+        updated: Date.now()
+    };
+    ws.send(JSON.stringify(body));
+}
+
+
+// New user via REST
+function createUser(nickName) {
+    console.log("createUser");
     const body = {
         nickname: nickName,
         status: 'ONLINE',

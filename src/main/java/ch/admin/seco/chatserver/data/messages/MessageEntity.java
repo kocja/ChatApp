@@ -3,9 +3,7 @@ package ch.admin.seco.chatserver.data.messages;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
-import javax.xml.crypto.Data;
 import java.time.Instant;
-import java.util.Date;
 
 @Entity
 public class MessageEntity {

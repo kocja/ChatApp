@@ -106,12 +106,20 @@ function updateFooter(text) {
     }
 }
 
+function updateLogin(text) {
+    const element = document.getElementById('loginbanner');
+    if(element) {
+        element.textContent = text;
+    }
+}
+
 const ws = new WebSocket('ws://localhost:8080/ws');
 function startWebSocket() {
     ws.onerror = event => console.error('WebSocket Error', event);
     ws.onmessage = event => handleMessage(event.data);
     ws.onopen = () => {
         updateFooter('Websocket connected!');
+        updateLogin('Logout')
     }
     ws.onclose = () => updateFooter("Not connected!");
 }
@@ -165,17 +173,20 @@ function handleMessage(input) {
                 element.remove();
                 messageDelete(elementUser);
             }
-            // Delete his/hers messages
+            // Delete their messages
             break;
     }
 }
 
+// Colors the vector image to its status
 const filtersByStatus = {
     'ONLINE': 'invert(21%) sepia(88%) saturate(3552%) hue-rotate(96deg) brightness(97%) contrast(103%)',
     'OFFLINE': 'invert(11%) sepia(67%) saturate(3947%) hue-rotate(353deg) brightness(94%) contrast(117%)',
     'AWAY': 'invert(56%) sepia(25%) saturate(6340%) hue-rotate(1deg) brightness(103%) contrast(105%)'
 };
 
+
+// Adds user onto the list of users on the website (visible)
 function addUser(user) {
     const li = document.createElement("li");
     li.setAttribute("id", user.id);

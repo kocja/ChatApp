@@ -1,7 +1,6 @@
 package ch.admin.seco.chatserver.dto.messages;
 
 import java.time.Instant;
-import java.util.Date;
 
 public class MessageDto {
 
