@@ -1,5 +1,7 @@
 package ch.admin.seco.chatserver.dto.users;
 
+import ch.admin.seco.chatserver.dto.users.status.Status;
+
 import java.time.Instant;
 
 public class CreateUserDto {

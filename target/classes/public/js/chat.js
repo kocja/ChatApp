@@ -55,23 +55,35 @@ function initData(_users, _messages) {
     messages.reverse().forEach(addMessages);
 }
 
+// Users
+function addUser(user) {
+    const li = document.createElement("li");
+    li.setAttribute("id", user.id);
+    if (localStorage.getItem('user-id') === user.id) {
+        li.className = 'list-group-item d-flex active';
+    } else {
+        li.className = 'list-group-item d-flex';
+    }
+
+    const avatar = document.createElement("img")
+    avatar.setAttribute('src', '/images/avatar_icon_' + user.avatar + '.svg');
+    avatar.setAttribute('alt', 'Avatar' + user.avatar);
+    avatar.setAttribute('style', 'width: 24px; height: 24px; filter: ' + (filtersByStatus[user.status] || ''));
+    avatar.className = 'mr-1';
+    li.appendChild(avatar);
+
+    const nickname = document.createElement("span");
+    nickname.appendChild(document.createTextNode(user.nickname));
+    li.appendChild(nickname);
+
+    document.getElementById("userList").appendChild(li);
+}
+
 function getUsersById(id) {
     return users.find(user => user.id === id).nickname;
 }
 
-function getMessagesByUserId(userId) {
-    return messages.filter(message => message.user_id === userId)
-}
-
-function messageDelete(user) {
-    for (let i = 0; i < messages.length; i++) {
-        if (messages[i].user_id === user.id) {
-            document.getElementById(messages[i].id).remove();
-        }
-    }
-}
-
-//Messages auf Chat.html anzeigen
+//Messages
 function addMessages(message) {
 
     const box = document.createElement('div');
@@ -100,6 +112,19 @@ function addMessages(message) {
     document.getElementById('message').value='';
 }
 
+function getMessagesByUserId(userId) {
+    return messages.filter(message => message.user_id === userId)
+}
+
+function messageDelete(user) {
+    for (let i = 0; i < messages.length; i++) {
+        if (messages[i].user_id === user.id) {
+            document.getElementById(messages[i].id).remove();
+        }
+    }
+}
+
+// Update text when connected
 function updateFooter(text) {
     const element = document.getElementById('pfooter');
     if (element) {
@@ -107,23 +132,23 @@ function updateFooter(text) {
     }
 }
 
+function loginBanner(text) {
+    const element = document.getElementById('loginbanner');
+    if (element) {
+        element.textContent = text;
+    }
+}
+
+// Websocket
 const ws = new WebSocket('ws://localhost:8080/ws');
 function startWebSocket() {
     ws.onerror = event => console.error('WebSocket Error', event);
     ws.onmessage = event => handleMessage(event.data);
     ws.onopen = () => {
         updateFooter('Websocket connected!');
+        loginBanner('Logout');
     }
     ws.onclose = () => updateFooter("Not connected!");
-}
-
-function createMessageWS(userId, newMessage) {
-    const body = {
-        user_id: userId,
-        message: newMessage,
-        timestamp: Date.now()
-    };
-    ws.send(JSON.stringify(body));
 }
 
 function handleMessage(input) {
@@ -170,32 +195,10 @@ function handleMessage(input) {
             break;
     }
 }
-
+// Adjust filter for status
 const filtersByStatus = {
     'ONLINE': 'invert(21%) sepia(88%) saturate(3552%) hue-rotate(96deg) brightness(97%) contrast(103%)',
     'OFFLINE': 'invert(11%) sepia(67%) saturate(3947%) hue-rotate(353deg) brightness(94%) contrast(117%)',
     'AWAY': 'invert(56%) sepia(25%) saturate(6340%) hue-rotate(1deg) brightness(103%) contrast(105%)'
 };
 
-function addUser(user) {
-    const li = document.createElement("li");
-    li.setAttribute("id", user.id);
-    if (localStorage.getItem('user-id') === user.id) {
-        li.className = 'list-group-item d-flex active';
-    } else {
-        li.className = 'list-group-item d-flex';
-    }
-
-    const avatar = document.createElement("img")
-    avatar.setAttribute('src', '/images/avatar_icon_' + user.avatar + '.svg');
-    avatar.setAttribute('alt', 'Avatar' + user.avatar);
-    avatar.setAttribute('style', 'width: 24px; height: 24px; filter: ' + (filtersByStatus[user.status] || ''));
-    avatar.className = 'mr-1';
-    li.appendChild(avatar);
-
-    const nickname = document.createElement("span");
-    nickname.appendChild(document.createTextNode(user.nickname));
-    li.appendChild(nickname);
-
-    document.getElementById("userList").appendChild(li);
-}

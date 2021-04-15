@@ -1,16 +1,12 @@
 package ch.admin.seco.chatserver.websocket;
 
 import ch.admin.seco.chatserver.dto.messages.CreateMessageDto;
-import ch.admin.seco.chatserver.dto.messages.MessageDto;
-import ch.admin.seco.chatserver.dto.messages.UpdateMessageDto;
-import ch.admin.seco.chatserver.dto.users.CreateUserDto;
 import ch.admin.seco.chatserver.service.MessageService;
 import ch.admin.seco.chatserver.service.UserService;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.springframework.stereotype.Component;
 import org.springframework.web.socket.CloseStatus;
 import org.springframework.web.socket.TextMessage;
-import org.springframework.web.socket.WebSocketMessage;
 import org.springframework.web.socket.WebSocketSession;
 import org.springframework.web.socket.handler.TextWebSocketHandler;
 

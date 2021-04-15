@@ -1,5 +1,7 @@
 package ch.admin.seco.chatserver.dto.users;
 
+import ch.admin.seco.chatserver.dto.users.status.Status;
+
 public class UpdateUserDto {
 
     // Declared final, user already exists

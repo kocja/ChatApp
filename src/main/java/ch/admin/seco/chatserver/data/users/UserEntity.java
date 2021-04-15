@@ -1,6 +1,6 @@
 package ch.admin.seco.chatserver.data.users;
 
-import ch.admin.seco.chatserver.dto.users.Status;
+import ch.admin.seco.chatserver.dto.users.status.Status;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;

@@ -4,7 +4,6 @@ import ch.admin.seco.chatserver.data.messages.MessageEntity;
 import ch.admin.seco.chatserver.data.messages.MessageRepository;
 import ch.admin.seco.chatserver.dto.messages.CreateMessageDto;
 import ch.admin.seco.chatserver.dto.messages.MessageDto;
-import ch.admin.seco.chatserver.dto.messages.UpdateMessageDto;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
@@ -19,6 +18,7 @@ public class MessageService {
         this.messageRepository = messageRepository;
     }
 
+    // Returns a list of messages converted into message Dtos
     private static List<MessageDto> mapToDto(final List<MessageEntity> messageEntities) {
         final List<MessageDto> messages = new ArrayList<>();
         for (final MessageEntity messageEntity : messageEntities) {
@@ -27,6 +27,7 @@ public class MessageService {
         return messages;
     }
 
+    // Map object to message dto.
     private static MessageDto mapToDto(final MessageEntity messageEntity) {
         return new MessageDto(messageEntity.getId(), messageEntity.getMessage(), messageEntity.getUser_id(), messageEntity.getTimestamp());
     }
@@ -40,20 +41,13 @@ public class MessageService {
     }
 
     public MessageDto createMessage(CreateMessageDto messageDto) {
-        final MessageEntity messageEntity = messageRepository.save(new MessageEntity(messageDto.getMessage(), messageDto.getUser_id(), messageDto.getTimestamp()));
+        final MessageEntity messageEntity = messageRepository.save(
+                new MessageEntity(
+                        messageDto.getMessage(),
+                        messageDto.getUser_id(),
+                        messageDto.getTimestamp()
+                ));
         return mapToDto(messageEntity);
-    }
-
-
-    public MessageDto updateMessage(final int id, UpdateMessageDto messageDto) {
-        final MessageEntity messageEntity = messageRepository.getOne(id);
-        if (messageDto.getMessage() != null) {
-            messageEntity.setMessage(messageDto.getMessage());
-        }
-        if (messageDto.getUser_id() != null) {
-            messageEntity.setUser_id(messageDto.getUser_id());
-        }
-        return mapToDto(messageRepository.save(messageEntity));
     }
 
     public void deleteAllMessages(){

@@ -8,7 +8,18 @@ function getAllMessages() {
     return fetch(messages_endpoint)
         .then(mapResponseIfNoError);
 }
+// Creates a message via WebSocket
 
+function createMessageWS(userId, newMessage) {
+    const body = {
+        user_id: userId,
+        message: newMessage,
+        timestamp: Date.now()
+    };
+    ws.send(JSON.stringify(body));
+}
+
+// Creates a message via REST
 function createMessage(userId, newMessage) {
     const body = {
         user_id: userId,
@@ -26,10 +37,4 @@ function createMessage(userId, newMessage) {
     })
         .then(response => response.ok ? response.json() : response.json().then(Promise.reject))
         .then(message => message.id)
-}
-
-
-function getMessageById(messageId) {
-    return fetch(messages_endpoint + '/' + messageId)
-        .then(mapResponseIfNoError);
 }
