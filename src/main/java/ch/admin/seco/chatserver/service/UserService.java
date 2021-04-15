@@ -24,11 +24,11 @@ public class UserService {
     }
 
     private static List<UserDto> mapToDto(final List<UserEntity> userEntities) {
-        final List<UserDto> users = new ArrayList<>();
-        for (final UserEntity userEntity : userEntities) {
-            users.add(mapToDto(userEntity));
+        final List<UserDto> USERS = new ArrayList<>();
+        for (final UserEntity USER_ENTITY : userEntities) {
+            USERS.add(mapToDto(USER_ENTITY));
         }
-        return users;
+        return USERS;
     }
 
     public List<UserDto> getAllUsers() {

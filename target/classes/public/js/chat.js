@@ -106,20 +106,12 @@ function updateFooter(text) {
     }
 }
 
-function updateLogin(text) {
-    const element = document.getElementById('loginbanner');
-    if(element) {
-        element.textContent = text;
-    }
-}
-
 const ws = new WebSocket('ws://localhost:8080/ws');
 function startWebSocket() {
     ws.onerror = event => console.error('WebSocket Error', event);
     ws.onmessage = event => handleMessage(event.data);
     ws.onopen = () => {
         updateFooter('Websocket connected!');
-        updateLogin('Logout')
     }
     ws.onclose = () => updateFooter("Not connected!");
 }
