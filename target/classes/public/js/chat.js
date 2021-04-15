@@ -97,6 +97,7 @@ function addMessages(message) {
     box.appendChild(messageText);
 
     document.getElementById("messageList").appendChild(box);
+    document.getElementById('message').value='';
 }
 
 function updateFooter(text) {
