@@ -8,18 +8,14 @@ public class CreateMessageDto {
     private int user_id;
     private Instant timestamp;
 
-    CreateMessageDto(final String message, final int user_id, Instant timestamp){
+    CreateMessageDto(final String message, final int user_id){
         this.message = message;
         this.user_id = user_id;
-        this.timestamp = timestamp;
+        this.timestamp = Instant.now();
     }
 
     public Instant getTimestamp() {
         return timestamp;
-    }
-
-    public void setTimestamp(Instant timestamp) {
-        this.timestamp = timestamp;
     }
 
     public String getMessage() {

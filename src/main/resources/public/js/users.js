@@ -18,7 +18,7 @@ function getUserById(userId) {
         : Promise.reject('userId mustn\'t be empty');
 }
 
-
+// Create User via REST
 function createUser(nickName) {
     console.log("createUser")
     const body = {

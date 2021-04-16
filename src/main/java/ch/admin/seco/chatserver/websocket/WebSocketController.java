@@ -1,6 +1,7 @@
 package ch.admin.seco.chatserver.websocket;
 
 import ch.admin.seco.chatserver.dto.messages.CreateMessageDto;
+import ch.admin.seco.chatserver.dto.messages.MessageDto;
 import ch.admin.seco.chatserver.service.MessageService;
 import ch.admin.seco.chatserver.service.UserService;
 import com.fasterxml.jackson.databind.ObjectMapper;
@@ -11,6 +12,7 @@ import org.springframework.web.socket.WebSocketSession;
 import org.springframework.web.socket.handler.TextWebSocketHandler;
 
 import java.io.IOException;
+import java.time.Instant;
 import java.util.List;
 import java.util.concurrent.CopyOnWriteArrayList;
 
@@ -47,8 +49,8 @@ public class WebSocketController extends TextWebSocketHandler {
 
         // Handle text message when a new message is sent
         final CreateMessageDto createMessageDto = objectMapper.readValue(message.getPayload(), CreateMessageDto.class);
-        messageService.createMessage(createMessageDto);
-        sendPayload("message_added", createMessageDto);
+        final MessageDto messageDto = messageService.createMessage(createMessageDto);
+        sendPayload("message_added", messageDto);
     }
 
 

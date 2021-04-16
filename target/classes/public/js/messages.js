@@ -13,8 +13,7 @@ function getAllMessages() {
 function createMessageWS(userId, newMessage) {
     const body = {
         user_id: userId,
-        message: newMessage,
-        timestamp: Date.now()
+        message: newMessage
     };
     ws.send(JSON.stringify(body));
 }
@@ -23,8 +22,7 @@ function createMessageWS(userId, newMessage) {
 function createMessage(userId, newMessage) {
     const body = {
         user_id: userId,
-        message: newMessage,
-        timestamp: Date.now()
+        message: newMessage
     };
 
     return fetch(messages_endpoint, {
