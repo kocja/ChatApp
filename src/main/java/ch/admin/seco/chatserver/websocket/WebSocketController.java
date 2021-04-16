@@ -55,11 +55,13 @@ public class WebSocketController extends TextWebSocketHandler {
     // Responsible for opening and closing of each session
     @Override
     public void afterConnectionEstablished(final WebSocketSession session) {
+        System.out.println(session.getId());
         activeSessions.add(session);
     }
 
     @Override
     public void afterConnectionClosed(final WebSocketSession session, final CloseStatus status) {
+        System.out.println(session.getId());
         activeSessions.remove(session);
     }
 

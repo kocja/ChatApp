@@ -85,7 +85,6 @@ function getUsersById(id) {
 
 //Messages
 function addMessages(message) {
-
     const box = document.createElement('div');
     box.setAttribute('id', message.id);
     box.setAttribute('class', 'card mb-2');
