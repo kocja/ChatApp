@@ -33,15 +33,17 @@ public class UserController {
     }
 
     @PostMapping
-    public UserDto createUser(@RequestBody CreateUserDto userDto) {
-        UserDto user = userService.createUser(userDto);
-        webSocketController.sendPayload("user_added", user);
-        return user;
+    public UserDto createUser(@RequestBody CreateUserDto createUserDto) {
+        UserDto userDto = userService.createUser(createUserDto);
+        webSocketController.sendPayload("user_added", userDto);
+        return userDto;
     }
 
     @PutMapping("{id}")
-    public UserDto updateUser(@PathVariable final int id, @RequestBody UpdateUserDto userDto) {
-        return userService.updateUser(id, userDto);
+    public UserDto updateUser(@PathVariable final int id, @RequestBody UpdateUserDto updateUserDto) {
+        UserDto userDto = userService.updateUser(id, updateUserDto);
+        webSocketController.sendPayload("user_updated", userDto);
+        return userDto;
     }
 
     @DeleteMapping("{id}")
