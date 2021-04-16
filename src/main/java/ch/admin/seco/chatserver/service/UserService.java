@@ -41,6 +41,7 @@ public class UserService {
 
     public UserDto createUser(CreateUserDto userDto) {
         final UserEntity userEntity = userRepository.save(new UserEntity(userDto.getNickname(), userDto.getStatus(), userDto.getAvatar(), userDto.getUpdated()));
+        System.out.println("Create user with ID " + userEntity.getId());
         return mapToDto(userEntity);
     }
 
@@ -55,6 +56,7 @@ public class UserService {
         if (userDto.getAvatar() != null) {
             userEntity.setAvatar(userDto.getAvatar());
         }
+        System.out.println("Update user with ID " + userEntity.getId());
         return mapToDto(userRepository.save(userEntity));
     }
 

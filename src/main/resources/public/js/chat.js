@@ -108,7 +108,7 @@ function addMessages(message) {
     box.appendChild(messageText);
 
     document.getElementById("messageList").appendChild(box);
-    document.getElementById('message').value='';
+    document.getElementById('message').value = '';
 }
 
 function getMessagesByUserId(userId) {
@@ -140,6 +140,7 @@ function loginBanner(text) {
 
 // Websocket
 const ws = new WebSocket('ws://localhost:8080/ws');
+
 function startWebSocket() {
     ws.onerror = event => console.error('WebSocket Error', event);
     ws.onmessage = event => handleMessage(event.data);
@@ -163,12 +164,14 @@ function handleMessage(input) {
             });
             break;
         case 'user_added':
-            addUser({
+            const newUser = {
                 id: jsonObject.data.id,
                 status: jsonObject.data.status,
                 avatar: jsonObject.data.avatar,
                 nickname: jsonObject.data.nickname
-            });
+            }
+            users.push(newUser);
+            addUser(newUser);
             break;
         case 'user_updated':
             // Update username
@@ -180,6 +183,7 @@ function handleMessage(input) {
             avatarElement.setAttribute('style', 'width: 24px; height: 24px; filter: ' + (filtersByStatus[jsonObject.data.status] || ''));
             // Update avatar
             avatarElement.setAttribute('src', '/images/avatar_icon_' + jsonObject.data.avatar + '.svg');
+            // TODO: Users push user updated
             break;
         case 'user_deleted':
             const element = document.getElementById(jsonObject.data.id);
@@ -194,6 +198,7 @@ function handleMessage(input) {
             break;
     }
 }
+
 // Adjust filter for status
 const filtersByStatus = {
     'ONLINE': 'invert(21%) sepia(88%) saturate(3552%) hue-rotate(96deg) brightness(97%) contrast(103%)',

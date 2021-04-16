@@ -35,6 +35,12 @@
     </div>
 </nav>
 <main class="flex-grow-1 container">
+    <div class="row">
+        <button class="btn btn-primary"
+                onclick="['user-id', 'user-name'].forEach(key => localStorage.removeItem((key)))">
+            DELETE LOCAL STORAGE
+        </button>
+    </div>
     <div class="row align-items-center">
         <div class="col-sm-1 col-md-2 col-lg-3 col-xl-4"></div>
         <div class="col-sm-10 col-md-8 col-lg-6 col-xl-4">
