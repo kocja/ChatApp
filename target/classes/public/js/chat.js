@@ -47,8 +47,7 @@ function initData(_users, _messages) {
     users = _users;
     messages = _messages;
     messages.forEach(message => {
-        const date = new Date(message.timestamp);
-        message.time = date.getTime();
+
     });
     // Sort messages by date
     users.forEach(addUser);
@@ -85,6 +84,9 @@ function getUsersById(id) {
 
 //Messages
 function addMessages(message) {
+    const date = new Date(message.timestamp);
+    message.timestamp = date.getDate() + "." + (date.getMonth() + 1) + " , " + date.getHours() + ":" + date.getMinutes();
+
     const box = document.createElement('div');
     box.setAttribute('id', message.id);
     box.setAttribute('class', 'card mb-2');
@@ -146,7 +148,7 @@ function startWebSocket() {
     ws.onmessage = event => handleMessage(event.data);
     ws.onopen = () => {
         updateFooter('Websocket connected!');
-        loginBanner('Logout');
+        loginBanner('Change username');
     }
     ws.onclose = () => updateFooter("Not connected!");
 }
@@ -183,6 +185,7 @@ function handleMessage(input) {
             avatarElement.setAttribute('style', 'width: 24px; height: 24px; filter: ' + (filtersByStatus[jsonObject.data.status] || ''));
             // Update avatar
             avatarElement.setAttribute('src', '/images/avatar_icon_' + jsonObject.data.avatar + '.svg');
+            // TODO: Users push user updated
             break;
         case 'user_deleted':
             const element = document.getElementById(jsonObject.data.id);
