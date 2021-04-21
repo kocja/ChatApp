@@ -9,9 +9,6 @@ public class CreateUserDto {
     private final String nickname;
     private final Status status;
     private final int avatar;
-
-
-
     private final Instant updated;
 
     public CreateUserDto(final String nickname, final Status status, final int avatar, final Instant updated){
