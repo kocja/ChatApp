@@ -3,11 +3,10 @@
 <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
       integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
 <link rel="preconnect" href="https://fonts.gstatic.com">
-<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@200&family=Poppins:wght@300&display=swap"
-      rel="stylesheet">
-<head>
-    <meta charset="utf-8"/>
-    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+
+<link rel="stylesheet" href="css/style.css">
+<meta charset="utf-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
 
     <!-- Bootstrap CSS -->
     <link
@@ -17,37 +16,40 @@
             crossorigin="anonymous"
     />
 
-    <title>Chat</title>
-</head>
+<style>
+    .bg-light {
+        background: white !important;
+    }
+</style>
 
+    <title>Chat</title>
 <body class="d-flex flex-column justify-content-between">
 <nav class="navbar navbar-expand-sm navbar-light bg-light justify-content-between">
     <a class="navbar-brand" href="#">Chat</a>
-    <button
-            class="navbar-toggler"
-            type="button"
-            data-toggle="collapse"
-            data-target="#navbarSupportedContent"
-            aria-controls="navbarSupportedContent"
-            aria-expanded="false"
-            aria-label="Toggle navigation"
-    >
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
     </button>
-
     <div class="collapse navbar-collapse flex-grow-0" id="navbarSupportedContent">
         <ul class="navbar-nav mr-auto">
             <li class="nav-item">
-                <a class="nav-link" href="index.html">Login</a>
+                <a class="nav-link" href="index.html">
+                    <img src="images/house.svg"  alt="Login"/>
+                </a>
             </li>
-            <li class="nav-item ">
-                <a class="nav-link" href="chat.html">Chat <span class="sr-only">(current)</span></a>
-            </li>
-            <li class="nav-item active">
-                <a class="nav-link" href="profile.html">Profile</a>
+            <li class="nav-item" style="fill: gray">
+                <a class="nav-link" href="chat.html">
+                    <img src="images/chat.svg" alt="Chat" id="active"/>
+                </a>
             </li>
             <li class="nav-item">
-                <a class="nav-link" href="settings.html">Settings</a>
+                <a class="nav-link" href="profile.html">
+                    <img src="images/person.svg" alt="Profile"/>
+                </a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="settings.html">
+                    <img src="images/settings.svg" alt="Settings" />
+                </a>
             </li>
         </ul>
     </div>
@@ -162,12 +164,12 @@
                                 ><img
                                         class="img-thumbnail"
                                         srcset="
-                          ../images/background_1_320.jpg   320w,
+                          images/background_1_320.jpg   320w,
                           images/background_1_640.jpg   640w,
                           images/background_1_1280.jpg 1280w,
                           images/background_1_2560.jpg 2560w
                         "
-                                        src="../images/background_1_320.jpg"
+                                        src="images/background_1_320.jpg"
                                         width="320"
                                         alt="Background 1"
                                 /></label>
@@ -178,12 +180,12 @@
                                 ><img
                                         class="img-thumbnail"
                                         srcset="
-                          ../images/background_2_320.jpg  1x,
+                          images/background_2_320.jpg  1x,
                           images/background_2_640.jpg  2x,
                           images/background_2_1280.jpg 3x,
                           images/background_2_2560.jpg 4x
                         "
-                                        src="../images/background_2_320.jpg"
+                                        src="images/background_2_320.jpg"
                                         width="320"
                                         alt="Background 2"
                                 />
@@ -195,13 +197,13 @@
                                 ><picture>
                                     <source
                                             srcset="
-                            ../images/background_3_320.jpg   320w,
+                            images/background_3_320.jpg   320w,
                             images/background_3_640.jpg   640w,
                             images/background_3_1280.jpg 1280w,
                             images/background_3_2560.jpg 2560w
                           "
                                     />
-                                    <img class="img-thumbnail" src="../images/background_3_320.jpg" width="320" alt="Background 3" />
+                                    <img class="img-thumbnail" src="images/background_3_320.jpg" width="320" alt="Background 3" />
                                 </picture>
                                 </label>
                             </div>
@@ -209,11 +211,11 @@
                                 <input class="form-check-input" type="radio" id="backgroundimage4" name="backgroundimage" value="4" />
                                 <label class="form-check-label mb-3" for="backgroundimage4"
                                 ><picture>
-                                    <source srcset="../images/background_4_320.jpg" media="(max-width: 320px)" />
-                                    <source srcset="../images/background_4_640.jpg" media="(max-width: 640px)" />
-                                    <source srcset="../images/background_4_1280.jpg" media="(max-width: 1280px)" />
-                                    <source srcset="../images/background_4_2560.jpg" media="(max-width: 2560px)" />
-                                    <img class="img-thumbnail" src="../images/background_4_320.jpg" width="320" alt="Background 4" />
+                                    <source srcset="images/background_4_320.jpg" media="(max-width: 320px)" />
+                                    <source srcset="images/background_4_640.jpg" media="(max-width: 640px)" />
+                                    <source srcset="images/background_4_1280.jpg" media="(max-width: 1280px)" />
+                                    <source srcset="images/background_4_2560.jpg" media="(max-width: 2560px)" />
+                                    <img class="img-thumbnail" src="images/background_4_320.jpg" width="320" alt="Background 4" />
                                 </picture>
                                 </label>
                             </div>
