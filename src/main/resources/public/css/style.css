@@ -4,7 +4,7 @@
 
 #messageList{
     overflow-y: scroll;
-    max-height: 50em;
+    max-height: 50rem;
 }
 
 body {

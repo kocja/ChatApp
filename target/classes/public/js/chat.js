@@ -49,9 +49,8 @@ function initData(_users, _messages) {
     messages.forEach(message => {
 
     });
-    // Sort messages by date
     users.forEach(addUser);
-    messages.reverse().forEach(addMessages);
+    messages.forEach(addMessages);
 }
 
 // Users
@@ -207,4 +206,6 @@ const filtersByStatus = {
     'OFFLINE': 'invert(11%) sepia(67%) saturate(3947%) hue-rotate(353deg) brightness(94%) contrast(117%)',
     'AWAY': 'invert(56%) sepia(25%) saturate(6340%) hue-rotate(1deg) brightness(103%) contrast(105%)'
 };
+
+window.scrollTo(0, document.body.scrollHeight);
 
