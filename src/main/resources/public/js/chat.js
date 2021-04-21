@@ -86,10 +86,12 @@ function addMessages(message) {
     const date = new Date(message.timestamp);
     message.timestamp = date.getDate() + "." + (date.getMonth() + 1) + " , " + date.getHours() + ":" + date.getMinutes();
 
+    //Container with ID
     const box = document.createElement('div');
     box.setAttribute('id', message.id);
     box.setAttribute('class', 'card mb-2');
 
+    // Header
     const header = document.createElement("div");
     header.setAttribute('class', 'card-header lead d-flex justify-content-between');
     box.appendChild(header);

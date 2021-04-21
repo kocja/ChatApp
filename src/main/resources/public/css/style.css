@@ -6,12 +6,13 @@
     overflow-y: scroll;
     max-height: 50rem;
 }
-
+.bg-light {
+    background-color: white !important;
+}
 body {
     height: 100vh;
     font-family: "Poppins", sans-serif;
 }
-
 
 button[type='submit'] {
     height: 100%;

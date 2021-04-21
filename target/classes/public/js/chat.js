@@ -86,10 +86,12 @@ function addMessages(message) {
     const date = new Date(message.timestamp);
     message.timestamp = date.getDate() + "." + (date.getMonth() + 1) + " , " + date.getHours() + ":" + date.getMinutes();
 
+    //Container with ID
     const box = document.createElement('div');
     box.setAttribute('id', message.id);
     box.setAttribute('class', 'card mb-2');
 
+    // Header
     const header = document.createElement("div");
     header.setAttribute('class', 'card-header lead d-flex justify-content-between');
     box.appendChild(header);
@@ -206,6 +208,3 @@ const filtersByStatus = {
     'OFFLINE': 'invert(11%) sepia(67%) saturate(3947%) hue-rotate(353deg) brightness(94%) contrast(117%)',
     'AWAY': 'invert(56%) sepia(25%) saturate(6340%) hue-rotate(1deg) brightness(103%) contrast(105%)'
 };
-
-window.scrollTo(0, document.body.scrollHeight);
-
