@@ -5,10 +5,12 @@ import ch.admin.seco.chatserver.data.users.UserRepository;
 import ch.admin.seco.chatserver.dto.users.CreateUserDto;
 import ch.admin.seco.chatserver.dto.users.UpdateUserDto;
 import ch.admin.seco.chatserver.dto.users.UserDto;
+import ch.admin.seco.chatserver.dto.users.status.Status;
 import org.springframework.stereotype.Service;
 
-import java.util.ArrayList;
-import java.util.List;
+import java.time.Instant;
+import java.time.temporal.ChronoUnit;
+import java.util.*;
 
 @Service
 public class UserService {
@@ -64,7 +66,49 @@ public class UserService {
         userRepository.deleteById(id);
     }
 
-    public void deleteAllUsers(){
+    public void deleteAllUsers() {
         userRepository.deleteAll();
+    }
+
+    public void updateStatus() {
+        final Map<Status, Collection<UserEntity>> classifiedUsers = classifyByShouldState(userRepository.findAll());
+
+        final Set<Status> keySet = classifiedUsers.keySet();
+        for (Status status : keySet) {
+            final Collection<UserEntity> users = classifiedUsers.get(status);
+            for (final UserEntity user : users) {
+                user.setStatus(status);
+                userRepository.save(user);
+            }
+        }
+    }
+
+    public Map<Status, Collection<UserEntity>> classifyByShouldState(final Collection<UserEntity> users) {
+
+        final Collection<UserEntity> onlineUsers = new ArrayList<>();
+        final Collection<UserEntity> awayUsers = new ArrayList<>();
+        final Collection<UserEntity> offlineUsers = new ArrayList<>();
+
+        final Map<Status, Collection<UserEntity>> userClassification = new HashMap<>();
+
+        Instant offline = Instant.now().minus(60, ChronoUnit.MINUTES);
+        Instant away = Instant.now().minus(30, ChronoUnit.MINUTES);
+
+        for (UserEntity user : users) {
+            Instant userUpdated = user.getUpdated();
+            if (userUpdated.isBefore(away)) {
+                if (userUpdated.isAfter(offline)) {
+                    awayUsers.add(user);
+                } else {
+                    offlineUsers.add(user);
+                }
+            } else {
+                onlineUsers.add(user);
+            }
+        }
+        userClassification.put(Status.AWAY, awayUsers);
+        userClassification.put(Status.ONLINE, onlineUsers);
+        userClassification.put(Status.OFFLINE, offlineUsers);
+        return userClassification;
     }
 }

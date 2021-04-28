@@ -3,10 +3,13 @@ package ch.admin.seco.chatserver.controller;
 import ch.admin.seco.chatserver.dto.users.CreateUserDto;
 import ch.admin.seco.chatserver.dto.users.UpdateUserDto;
 import ch.admin.seco.chatserver.dto.users.UserDto;
+import ch.admin.seco.chatserver.dto.users.status.Status;
 import ch.admin.seco.chatserver.service.UserService;
 import ch.admin.seco.chatserver.websocket.WebSocketController;
 import org.springframework.web.bind.annotation.*;
 
+import java.time.Instant;
+import java.util.Collections;
 import java.util.List;
 
 @RestController
@@ -54,5 +57,11 @@ public class UserController {
     @DeleteMapping
     public void deleteAllUsers() {
         userService.deleteAllUsers();
+    }
+
+    @PostMapping("updateStatus")
+    public void updateStatus()
+    {
+        userService.updateStatus();
     }
 }

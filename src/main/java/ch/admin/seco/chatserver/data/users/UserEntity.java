@@ -1,6 +1,7 @@
 package ch.admin.seco.chatserver.data.users;
 
 import ch.admin.seco.chatserver.dto.users.status.Status;
+import org.hibernate.annotations.UpdateTimestamp;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -16,6 +17,8 @@ public class UserEntity {
     private String nickname;
     private Status status;
     private int avatar;
+
+    @UpdateTimestamp
     private Instant updated;
 
     public UserEntity(final String nickname, final Status status, final int avatar, final Instant updated){
